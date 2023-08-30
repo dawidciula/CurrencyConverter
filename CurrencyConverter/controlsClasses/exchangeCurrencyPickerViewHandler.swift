@@ -1,5 +1,5 @@
 //
-//  currentCurrencyPickerViewHandler.swift
+//  exchangeCurrencyPickerViewHandler.swift
 //  CurrencyConverter
 //
 //  Created by Dawid Ciuła on 30/08/2023.
@@ -7,17 +7,13 @@
 
 import UIKit
 
-class currentCurrencyPickerViewHandler: NSObject, UIPickerViewDelegate, UIPickerViewDataSource
+class exchangeCurrencyPickerViewHandler: NSObject, UIPickerViewDelegate, UIPickerViewDataSource
 {
     var dataArray: [String]
     
-    init(data: [String], excludingCurrency: String? = nil) {
-        if let currency = excludingCurrency {
-                self.dataArray = data.filter { $0 != currency }
-            } else {
-                self.dataArray = data
-            }
-            super.init()
+    init(data: [String]) {
+           self.dataArray = data
+           super.init()
        }
     
     var didSelectedItem: ((String) -> Void)?
@@ -38,4 +34,6 @@ class currentCurrencyPickerViewHandler: NSObject, UIPickerViewDelegate, UIPicker
         let selectedItem = dataArray[row]
         didSelectedItem?(selectedItem)
     }
+    
+    
 }

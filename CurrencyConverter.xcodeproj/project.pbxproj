@@ -14,6 +14,7 @@
 		C2876D2E2A9FE2C600AB7D6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2876D2D2A9FE2C600AB7D6B /* Assets.xcassets */; };
 		C2876D312A9FE2C600AB7D6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2876D2F2A9FE2C600AB7D6B /* LaunchScreen.storyboard */; };
 		C2876D3B2A9FE89000AB7D6B /* currentCurrencyPickerViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2876D3A2A9FE89000AB7D6B /* currentCurrencyPickerViewHandler.swift */; };
+		C2876D3E2A9FEFC500AB7D6B /* exchangeCurrencyPickerViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2876D3D2A9FEFC500AB7D6B /* exchangeCurrencyPickerViewHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C2876D302A9FE2C600AB7D6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C2876D322A9FE2C600AB7D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2876D3A2A9FE89000AB7D6B /* currentCurrencyPickerViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentCurrencyPickerViewHandler.swift; sourceTree = "<group>"; };
+		C2876D3D2A9FEFC500AB7D6B /* exchangeCurrencyPickerViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exchangeCurrencyPickerViewHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				C2876D3A2A9FE89000AB7D6B /* currentCurrencyPickerViewHandler.swift */,
+				C2876D3D2A9FEFC500AB7D6B /* exchangeCurrencyPickerViewHandler.swift */,
 			);
 			path = controlsClasses;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				C2876D292A9FE2C500AB7D6B /* ViewController.swift in Sources */,
 				C2876D252A9FE2C500AB7D6B /* AppDelegate.swift in Sources */,
 				C2876D3B2A9FE89000AB7D6B /* currentCurrencyPickerViewHandler.swift in Sources */,
+				C2876D3E2A9FEFC500AB7D6B /* exchangeCurrencyPickerViewHandler.swift in Sources */,
 				C2876D272A9FE2C500AB7D6B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
