@@ -7,32 +7,37 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PickerHandlerDelegate {
     
-    let currenciesToExchange = ["PLN", "EUR", "USD"]
-    lazy var firstPickerCurrency = currenciesToExchange
-    lazy var secondPickerCurrency = currenciesToExchange
+    var allCurrencies = ["-", "PLN", "EUR", "USD"]
     
+    var firstCurrencyPickerHandler: CurrencyPickerHandler?
+    var secondCurrencyPickerHandler: CurrencyPickerHandler?
     
-    
-    @IBOutlet var currentCurrencyPickerView: UIPickerView!
-    @IBOutlet var exchangeCurrencyPickerView: UIPickerView!
-    
-    var currentCurrencyPickerViewHandler: currentCurrencyPickerViewHandler!
-    var exchangeCurrencyPickerViewHandler: exchangeCurrencyPickerViewHandler!
+    @IBOutlet var firstCurrencyPicker: UIPickerView!
+    @IBOutlet var secondCurrencyPicker: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        currentCurrencyPickerViewHandler = CurrencyConverter.currentCurrencyPickerViewHandler(data: currenciesToExchange)
-        exchangeCurrencyPickerViewHandler = CurrencyConverter.exchangeCurrencyPickerViewHandler(data: currenciesToExchange)
-       
-        currentCurrencyPickerView.delegate = currentCurrencyPickerViewHandler
-        currentCurrencyPickerView.dataSource = currentCurrencyPickerViewHandler
-        exchangeCurrencyPickerView.delegate = exchangeCurrencyPickerViewHandler
-        exchangeCurrencyPickerView.dataSource = exchangeCurrencyPickerViewHandler
+        
+        firstCurrencyPickerHandler = CurrencyPickerHandler(currencies: allCurrencies, picker: firstCurrencyPicker)
+        secondCurrencyPickerHandler = CurrencyPickerHandler(currencies: allCurrencies, picker: secondCurrencyPicker)
+        
+        firstCurrencyPicker.delegate = firstCurrencyPickerHandler
+        firstCurrencyPicker.dataSource = firstCurrencyPickerHandler
+        
+        secondCurrencyPicker.delegate = secondCurrencyPickerHandler
+        secondCurrencyPicker.dataSource = secondCurrencyPickerHandler
+        
+        firstCurrencyPickerHandler?.delegate = self
+        secondCurrencyPickerHandler?.delegate = self
     }
     
-
+    func didCurrencySelected(currency: String, inPicker picker: CurrencyPickerHandler) {
+        if picker === firstCurrencyPickerHandler {
+            secondCurrencyPickerHandler?.updateAvailableCurrencies(excluding: currency)
+        } else if picker === secondCurrencyPickerHandler {
+            firstCurrencyPickerHandler?.updateAvailableCurrencies(excluding: currency)
+        }
+    }
 }
-
