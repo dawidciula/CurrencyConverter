@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController, PickerHandlerDelegate {
     
+    let apiConnection = APIConnection()
+    
     var allCurrencies = ["-", "PLN", "EUR", "USD"]
     
     var firstCurrencyPickerHandler: CurrencyPickerHandler?
@@ -31,6 +33,17 @@ class ViewController: UIViewController, PickerHandlerDelegate {
         
         firstCurrencyPickerHandler?.delegate = self
         secondCurrencyPickerHandler?.delegate = self
+        
+        apiConnection.fetchExchangeRates { result in
+                    switch result {
+                    case .success(let exchangeRates):
+                        print("Otrzymano kursy walut: \(exchangeRates.rates)")
+                        // Możesz teraz zaktualizować interfejs użytkownika z otrzymanymi danymi, jeśli to konieczne
+                    case .failure(let error):
+                        print("Wystąpił błąd: \(error.localizedDescription)")
+                        // Obsłuż błąd, np. wyświetlając komunikat o błędzie dla użytkownika
+                    }
+                }
     }
     
     func didCurrencySelected(currency: String, inPicker picker: CurrencyPickerHandler) {

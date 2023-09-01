@@ -14,6 +14,8 @@
 		C2876D2E2A9FE2C600AB7D6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2876D2D2A9FE2C600AB7D6B /* Assets.xcassets */; };
 		C2876D312A9FE2C600AB7D6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2876D2F2A9FE2C600AB7D6B /* LaunchScreen.storyboard */; };
 		C2876D3B2A9FE89000AB7D6B /* currentCurrencyPickerViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2876D3A2A9FE89000AB7D6B /* currentCurrencyPickerViewHandler.swift */; };
+		C2F641112AA21E8200597C7B /* APIConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F641102AA21E8200597C7B /* APIConnection.swift */; };
+		C2F641142AA21EE800597C7B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C2F641132AA21EE800597C7B /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,7 @@
 		C2876D302A9FE2C600AB7D6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C2876D322A9FE2C600AB7D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2876D3A2A9FE89000AB7D6B /* currentCurrencyPickerViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentCurrencyPickerViewHandler.swift; sourceTree = "<group>"; };
+		C2F641102AA21E8200597C7B /* APIConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F641142AA21EE800597C7B /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +46,7 @@
 		C2876D182A9FE2C500AB7D6B = {
 			isa = PBXGroup;
 			children = (
+				C2F641102AA21E8200597C7B /* APIConnection.swift */,
 				C2876D232A9FE2C500AB7D6B /* CurrencyConverter */,
 				C2876D222A9FE2C500AB7D6B /* Products */,
 			);
@@ -94,6 +99,9 @@
 			dependencies = (
 			);
 			name = CurrencyConverter;
+			packageProductDependencies = (
+				C2F641132AA21EE800597C7B /* Alamofire */,
+			);
 			productName = CurrencyConverter;
 			productReference = C2876D212A9FE2C500AB7D6B /* CurrencyConverter.app */;
 			productType = "com.apple.product-type.application";
@@ -122,6 +130,9 @@
 				Base,
 			);
 			mainGroup = C2876D182A9FE2C500AB7D6B;
+			packageReferences = (
+				C2F641122AA21EE800597C7B /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = C2876D222A9FE2C500AB7D6B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -152,6 +163,7 @@
 				C2876D292A9FE2C500AB7D6B /* ViewController.swift in Sources */,
 				C2876D252A9FE2C500AB7D6B /* AppDelegate.swift in Sources */,
 				C2876D3B2A9FE89000AB7D6B /* currentCurrencyPickerViewHandler.swift in Sources */,
+				C2F641112AA21E8200597C7B /* APIConnection.swift in Sources */,
 				C2876D272A9FE2C500AB7D6B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +380,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C2F641122AA21EE800597C7B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C2F641132AA21EE800597C7B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2F641122AA21EE800597C7B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C2876D192A9FE2C500AB7D6B /* Project object */;
 }
