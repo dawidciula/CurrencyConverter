@@ -1,8 +1,7 @@
+// ViewController.swift
+// CurrencyConverter
 //
-//  ViewController.swift
-//  CurrencyConverter
-//
-//  Created by Dawid Ciuła on 30/08/2023.
+// Created by Dawid Ciuła on 30/08/2023.
 //
 
 import UIKit
@@ -11,13 +10,20 @@ class ViewController: UIViewController, PickerHandlerDelegate {
     
     let apiConnection = APIConnection()
     
-    var allCurrencies = ["-", "PLN", "EUR", "USD"]
+    var allCurrencies = ["PLN", "CAD", "USD", "EGP", "RUB", "CZK"]
+    
+    var exchangeRates: [String: Double] = [:]
     
     var firstCurrencyPickerHandler: CurrencyPickerHandler?
     var secondCurrencyPickerHandler: CurrencyPickerHandler?
     
+    @IBOutlet var quantityTextField: UITextField!
     @IBOutlet var firstCurrencyPicker: UIPickerView!
+    @IBOutlet var resultLabel: UILabel!
     @IBOutlet var secondCurrencyPicker: UIPickerView!
+    @IBAction func convertCurrencyButtonTapped(_ sender: Any) {
+        convertCurrency()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +41,14 @@ class ViewController: UIViewController, PickerHandlerDelegate {
         secondCurrencyPickerHandler?.delegate = self
         
         apiConnection.fetchExchangeRates { result in
-                    switch result {
-                    case .success(let exchangeRates):
-                        print("Otrzymano kursy walut: \(exchangeRates.rates)")
-                        // Możesz teraz zaktualizować interfejs użytkownika z otrzymanymi danymi, jeśli to konieczne
-                    case .failure(let error):
-                        print("Wystąpił błąd: \(error.localizedDescription)")
-                        // Obsłuż błąd, np. wyświetlając komunikat o błędzie dla użytkownika
-                    }
-                }
+            switch result {
+            case .success(let exchangeRatesResponse):
+                self.exchangeRates = exchangeRatesResponse.rates
+                print("Otrzymano kursy walut:\(exchangeRatesResponse.rates)")
+            case .failure(let error):
+                print("Wystąpił błąd: \(error.localizedDescription)")
+            }
+        }
     }
     
     func didCurrencySelected(currency: String, inPicker picker: CurrencyPickerHandler) {
@@ -53,4 +58,47 @@ class ViewController: UIViewController, PickerHandlerDelegate {
             firstCurrencyPickerHandler?.updateAvailableCurrencies(excluding: currency)
         }
     }
+    
+    func convertCurrency() {
+        guard let amountString = quantityTextField.text, let amount = Double(amountString) else {
+            print("Nieprawidłowa wartość wprowadzona")
+            return
+        }
+
+        let fromCurrency = allCurrencies[firstCurrencyPicker.selectedRow(inComponent: 0)]
+        let toCurrency = allCurrencies[secondCurrencyPicker.selectedRow(inComponent: 0)]
+
+        // Jeśli źródło i docelowa waluta są takie same
+        if fromCurrency == toCurrency {
+            resultLabel.text = amountString
+            return
+        }
+
+        let fromRate: Double = fromCurrency == "EUR" ? 1.0 : (exchangeRates[fromCurrency] ?? 1.0)
+        let toRate: Double = toCurrency == "EUR" ? 1.0 : (exchangeRates[toCurrency] ?? 1.0)
+
+        var convertedAmount: Double = 0.0
+
+        // Jeśli waluta źródłowa to EUR
+        if fromCurrency == "EUR" {
+            convertedAmount = amount * toRate
+        }
+        // Jeśli waluta docelowa to EUR
+        else if toCurrency == "EUR" {
+            convertedAmount = amount / fromRate
+        }
+        // W przeciwnym przypadku przelicz przez walutę bazową (EUR)
+        else {
+            // Przeliczanie waluty źródłowej na EUR
+            let amountInEUR = amount / fromRate
+            // Przeliczanie z EUR na walutę docelową
+            convertedAmount = amountInEUR * toRate
+        }
+
+        resultLabel.text = String(format: "%.10f", convertedAmount)
+    }
+
+
+
 }
+
