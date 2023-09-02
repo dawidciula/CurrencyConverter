@@ -68,7 +68,7 @@ class ViewController: UIViewController, PickerHandlerDelegate {
         let fromCurrency = allCurrencies[firstCurrencyPicker.selectedRow(inComponent: 0)]
         let toCurrency = allCurrencies[secondCurrencyPicker.selectedRow(inComponent: 0)]
 
-        // Jeśli źródło i docelowa waluta są takie same
+
         if fromCurrency == toCurrency {
             resultLabel.text = amountString
             return
@@ -79,19 +79,17 @@ class ViewController: UIViewController, PickerHandlerDelegate {
 
         var convertedAmount: Double = 0.0
 
-        // Jeśli waluta źródłowa to EUR
+
         if fromCurrency == "EUR" {
             convertedAmount = amount * toRate
         }
-        // Jeśli waluta docelowa to EUR
+
         else if toCurrency == "EUR" {
             convertedAmount = amount / fromRate
         }
-        // W przeciwnym przypadku przelicz przez walutę bazową (EUR)
+
         else {
-            // Przeliczanie waluty źródłowej na EUR
             let amountInEUR = amount / fromRate
-            // Przeliczanie z EUR na walutę docelową
             convertedAmount = amountInEUR * toRate
         }
 
